@@ -32,7 +32,7 @@ deploy:
   script: echo Deploy ...
   rules:
     - if: $CI_COMMIT_BRANCH =~ /^hotfix-/
-        when: manual
-        allow_failure: false
+      when: manual
+      allow_failure: false
     - if: $CI_COMMIT_TAG
  
