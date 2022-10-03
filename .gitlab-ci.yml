@@ -2,11 +2,14 @@
 
 image: node:16
 
-# cache:
-#   key: $CI_COMMIT_REF_SLUG
-#   paths:
-#     - now
+cache:
+  paths:
+    - .yarn-cache
 
 job:
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - node_modules
   script:
     - yarn install --frozen-lockfile --cache-folder .yarn-cache --prefer-offline
