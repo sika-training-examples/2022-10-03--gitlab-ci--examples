@@ -1,73 +1,17 @@
 # .gitlab-ci.yml
 
-image: sikalabs/ci
+pipeline_a:
+  trigger:
+    include: a/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - changes:
+        - a/**
 
-deploy dev:
-  when: manual
-  variables:
-    HOST: dev.k8s.sikademo.com
-  script: 
-    - helm upgrade --install dev hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Ahoj z Gitlab CI!"
-    - slu wait-for tls -a $HOST:443
-  environment:
-    name: dev
-    url: https://$HOST
-    on_stop: stop deploy dev
-
-stop deploy dev:
-  variables:
-    HOST: dev.k8s.sikademo.com
-    GIT_STRATEGY: none
-  script: helm uninstall dev
-  when: manual
-  environment:
-    name: dev
-    action: stop
-
-# ----
-
-deploy prod:
-  when: manual
-  variables:
-    HOST: prod.k8s.sikademo.com
-  script: 
-    - helm upgrade --install prod hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Hello from Gitlab CI!"
-    - slu wait-for tls -a $HOST:443
-  environment:
-    name: prod
-    url: https://$HOST
-    on_stop: stop deploy prod
-
-stop deploy prod:
-  variables:
-    HOST: prod.k8s.sikademo.com
-    GIT_STRATEGY: none
-  script: helm uninstall prod
-  when: manual
-  environment:
-    name: prod
-    action: stop
-
-# ---
- 
-deploy stage:
-  when: manual
-  variables:
-    HOST: stage.k8s.sikademo.com
-  script: 
-    - helm upgrade --install stage hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Hello from Gitlab CI!"
-    - slu wait-for tls -a $HOST:443
-  environment:
-    name: stage
-    url: https://$HOST
-    on_stop: stop deploy stage
-
-stop deploy stage:
-  variables:
-    HOST: stage.k8s.sikademo.com
-    GIT_STRATEGY: none
-  script: helm uninstall stage
-  when: manual
-  environment:
-    name: stage
-    action: stop
+pipeline_b:
+  trigger:
+    include: b/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - changes:
+        - b/**
