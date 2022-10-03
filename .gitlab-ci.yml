@@ -3,13 +3,5 @@
 image: sikalabs/ci
 
 test1:
-  script: '[ "$(slu random int --max 2)" == "0" ]'
-  retry: 2
-
-test2:
-  script: '[ "$(slu random int --max 2)" == "0" ]'
-  retry: 2
-
-test3:
-  script: '[ "$(slu random int --max 2)" == "0" ]'
+  script: 'false'
   retry: 2
