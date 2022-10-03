@@ -8,9 +8,9 @@ stages:
   - deploy
 
 build:
-  stages: build
+  stage: build
   script: curl https://checkip.amazonaws.com
 
 deploy:
-  stages: deploy
+  stage: deploy
   script: curl https://checkip.amazonaws.com
