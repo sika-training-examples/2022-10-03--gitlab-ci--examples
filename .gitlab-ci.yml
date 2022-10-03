@@ -5,10 +5,9 @@ stages:
 deploy prod:
   stage: deploy prod
   when: manual
-  # allow_failure: false
-  # allow_failure: true
+  allow_failure: false
   script:
-    - echo Deploy ... && false
+    - echo Deploy ...lse
 
 test prod:
   stage: test prod
