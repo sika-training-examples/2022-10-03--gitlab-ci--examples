@@ -1,11 +1,12 @@
 # .gitlab-ci.yml
 
-cache:
-  key: $CI_COMMIT_REF_SLUG
-  paths:
-    - now
+image: node:16
+
+# cache:
+#   key: $CI_COMMIT_REF_SLUG
+#   paths:
+#     - now
 
 job:
   script:
-    - date >> now
-    - cat now
+    - yarn install --frozen-lockfile --cache-folder .yarn-cache --prefer-offline
