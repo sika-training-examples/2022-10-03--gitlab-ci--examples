@@ -1,38 +1,13 @@
 # .gitlab-ci.yml
 
-stages:
-  - unit_test
-  - integration_test
-  - build
-  - deploy
-
-unit_test:
-  stage: unit_test
-  script: echo Unit Test ...
+Build A:
+  script: echo Build A ...
   rules:
-    - if: $CI_COMMIT_BRANCH
-    - if: $CI_COMMIT_TAG
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - changes:
+        - a/**
 
-integration_test:
-  stage: integration_test
-  script: echo Integration Test ...
+Build B:
+  script: echo Build B ...
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
-build:
-  stage: build
-  script: echo Build ...
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-    - if: $CI_COMMIT_TAG
-
-deploy:
-  stage: deploy
-  script: echo Deploy ...
-  rules:
-    - if: $CI_COMMIT_BRANCH =~ /^hotfix-/
-      when: manual
-      allow_failure: false
-    - if: $CI_COMMIT_TAG
- 
+    - changes:
+        - b/**
