@@ -12,5 +12,5 @@ build:
     - infracost output --path infracost.local.out.json --format html --out-file infracost.local.out.html
   artifacts:
     paths:
-      - out
+      - infracost.local.out.html
 
