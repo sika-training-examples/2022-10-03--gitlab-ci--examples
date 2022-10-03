@@ -8,6 +8,7 @@ variables:
 deploy:
   script: 
     - helm upgrade --install $CI_COMMIT_REF_SLUG hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Hello from Gitlab CI!"
+    - slu wait-for tls -a $HOST:443
   environment:
     name: $CI_COMMIT_REF_SLUG
     url: https://$HOST
