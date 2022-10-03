@@ -6,4 +6,4 @@ test prod:
   stage: test prod
   allow_failure: true
   script:
-    - echo Test ...
+    - echo Test ... && false
