@@ -1,7 +1,2 @@
-# .gitlab-ci.yml
-
-image: sikalabs/ci
-
-test1:
-  script: 'false'
-  retry: 2
+job:
+  script: env
