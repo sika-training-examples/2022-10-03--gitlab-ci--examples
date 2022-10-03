@@ -1,7 +1,25 @@
 # .gitlab-ci.yml
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: 
+    - export FOO_ID=admin
+    - export FOO_TOKEN=asdfasdf
+    - env | grep FOO_ > .env
+  artifacts:
+    paths:
+      - .env
+
 test:
+  stage: test
   image: ondrejsika/pytest
   script:
+    - . .env
+    - echo $FOO_ID
+    - echo $FOO_TOKEN
     - pytest --junitxml=report.xml
   artifacts:
     reports:
