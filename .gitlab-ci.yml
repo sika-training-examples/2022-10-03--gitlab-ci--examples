@@ -1,4 +1,4 @@
 # .gitlab-ci.yml
 
 job:
-  script: echo Hello World!
+  script: echo Hello World! && false
