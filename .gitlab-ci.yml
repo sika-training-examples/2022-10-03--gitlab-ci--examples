@@ -1,13 +1,15 @@
 # .gitlab-ci.yml
 
-Build A:
-  script: echo Build A ...
+Build Frontend:
+  script: echo Build Frontend ...
   rules:
-    - changes:
-        - a/**
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_ID
+      changes:
+        - frontend/**
 
-Build B:
-  script: echo Build B ...
+Build Backend:
+  script: echo Build Backend ...
   rules:
-    - changes:
-        - b/**
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_MERGE_REQUEST_ID
+      changes:
+        - backend/**
