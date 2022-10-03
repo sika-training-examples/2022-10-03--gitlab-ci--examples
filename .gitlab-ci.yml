@@ -7,7 +7,7 @@ deploy dev:
   variables:
     HOST: dev.k8s.sikademo.com
   script: 
-    - helm upgrade --install dev hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Hello from Gitlab CI!"
+    - helm upgrade --install dev hello-world --repo https://helm.sikalabs.io --set host=$HOST --set TEXT="Ahoj z Gitlab CI!"
     - slu wait-for tls -a $HOST:443
   environment:
     name: dev
