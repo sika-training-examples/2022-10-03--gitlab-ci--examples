@@ -1,5 +1,29 @@
-job:
+# .gitlab-ci.yml
+
+variables:
+  XXX_GLOBAL: global
+
+job1:
+  script: env | grep XXX
+
+job2:
+  variables:
+    XXX_LOCAL: local
+  script: env | grep XXX
+
+job3:
+  variables:
+    XXX_FOO: foo
+    XXX_BAR: bar
+    XXX_FOO_BAR: $XXX_FOO-$XXX_BAR
+  script: env | grep XXX
+
+job4:
+  variables:
+    TAG: $CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
+    IMAGE: $CI_REGISTRY_IMAGE:$TAG
+    BASE_HOST: sikademo.com
+    HOST: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.$BASE_HOST
   script:
-    - echo $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_SLUG.dev.corp.com
-    - echo docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG-$CI_COMMIT_SHORT_SHA-$CI_PIPELINE_ID
-    - echo docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - echo docker build . -t $IMAGE
+    - echo helm install ... --set host=$HOST
