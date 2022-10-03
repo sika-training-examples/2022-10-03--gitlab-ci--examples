@@ -1,16 +1,20 @@
 # .gitlab-ci.yml
 
+variables:
+  HOST: $CI_COMMIT_REF_SLUG.k8s.sikademo.com
+
 deploy:
-  script: echo Deploy!
+  script: 
+    - helm upgrade --install $CI_COMMIT_REF_SLUG hello-world --repo https://helm.sikalabs.io --set host=$HOST
   environment:
     name: $CI_COMMIT_REF_SLUG
-    url: https://$CI_COMMIT_REF_SLUG.dev.company.com
+    url: https://$HOST
     on_stop: stop deploy
 
 stop deploy:
   variables:
     GIT_STRATEGY: none
-  script: echo Stop!
+  script: helm uninstall $CI_COMMIT_REF_SLUG
   when: manual
   environment:
     name: $CI_COMMIT_REF_SLUG
