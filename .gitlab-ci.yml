@@ -2,14 +2,8 @@ stages:
   - deploy prod
   - test prod
 
-deploy prod:
-  stage: deploy prod
-  when: manual
-  allow_failure: false
-  script:
-    - echo Deploy ...lse
-
 test prod:
   stage: test prod
+  allow_failure: true
   script:
     - echo Test ...
