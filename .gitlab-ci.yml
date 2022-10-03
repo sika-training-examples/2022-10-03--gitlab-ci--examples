@@ -1,13 +1,29 @@
-image: sikalabs/ci
+# .gitlab-ci.yml
 
 stages:
   - build
-  - deploy
+  - test
 
 build:
   stage: build
-  script: curl https://checkip.amazonaws.com
+  script: echo Run build ...
+  # script: echo Run build ... && false
+
+test:
+  stage: test
+  script: echo Run test ...
 
 deploy:
-  stage: deploy
-  script: curl https://checkip.amazonaws.com
+  stage: test
+  script: echo Run deploy ...
+  when: manual
+
+diagnostics:
+  stage: test
+  script: echo Run diagnostics ...
+  when: on_failure
+
+reporting:
+  stage: test
+  script: echo Run CI reporting ...
+  when: always
