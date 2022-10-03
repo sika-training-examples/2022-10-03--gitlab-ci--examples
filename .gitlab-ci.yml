@@ -1,5 +1,7 @@
 # .gitlab-ci.yml
 
+image: sikalabs/ci
+
 variables:
   HOST: $CI_COMMIT_REF_SLUG.k8s.sikademo.com
 
