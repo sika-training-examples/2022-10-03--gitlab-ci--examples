@@ -1,9 +1,15 @@
-stages:
-  - deploy prod
-  - test prod
+# .gitlab-ci.yml
 
-test prod:
-  stage: test prod
-  allow_failure: true
-  script:
-    - echo Test ... && false
+image: sikalabs/ci
+
+test1:
+  script: '[ "$(slu random int --max 2)" == "0" ]'
+  retry: 2
+
+test2:
+  script: '[ "$(slu random int --max 2)" == "0" ]'
+  retry: 2
+
+test3:
+  script: '[ "$(slu random int --max 2)" == "0" ]'
+  retry: 2
