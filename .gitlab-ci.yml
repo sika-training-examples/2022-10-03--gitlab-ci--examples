@@ -10,6 +10,8 @@ build:
     - export FOO_TOKEN=asdfasdf
     - env | grep FOO_ > .env
   artifacts:
+    reports:
+      dotenv: .env
     paths:
       - .env
 
