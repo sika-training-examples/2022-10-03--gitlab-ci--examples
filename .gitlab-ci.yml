@@ -1,13 +1,16 @@
-job1:
-  script:
-    - echo deploy!
-    - echo test!
-  after_script:
-    - echo $CI_JOB_STATUS
+image: alpine
 
-job2:
-  script:
-    - echo deploy!
-    - echo test! && false
-  after_script:
-    - echo $CI_JOB_STATUS
+before_script:
+  - apk add curl
+
+stages:
+  - build
+  - deploy
+
+build:
+  stages: build
+  script: curl https://checkip.amazonaws.com
+
+deploy:
+  stages: deploy
+  script: curl https://checkip.amazonaws.com
