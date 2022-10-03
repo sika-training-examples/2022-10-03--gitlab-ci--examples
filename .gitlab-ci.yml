@@ -2,11 +2,8 @@
 
 image: node:16
 
-cache:
-  key: $CI_COMMIT_REF_SLUG
-  paths:
-    - node_modules
-    - .yarn-cache
+variables:
+  GIT_CLEAN_FLAGS: -ffdx -e .yarn-cache
 
 job:
   script:
