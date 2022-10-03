@@ -10,6 +10,7 @@ build:
   script:
     - infracost breakdown --path . --format json --out-file infracost.local.out.json
     - infracost output --path infracost.local.out.json --format html --out-file infracost.local.out.html
+    - echo http://xxx.pages.sikademo.com/-/ondrejsika/-/jobs/$CI_JOB_ID/artifacts/infracost.local.out.html
   artifacts:
     paths:
       - infracost.local.out.html
