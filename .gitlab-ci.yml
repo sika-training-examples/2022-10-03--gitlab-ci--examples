@@ -1,19 +1,16 @@
 # .gitlab-ci.yml
 
+image: sikalabs/ci
+
 stages:
   - build
-  - test
 
 build:
   stage: build
   script:
-    - mkdir -p out
-    - echo '<h1>Hello World!</h1>' > out/index.html
+    - infracost breakdown --path . --format json --out-file infracost.local.out.json
+    - infracost output --path infracost.local.out.json --format html --out-file infracost.local.out.html
   artifacts:
     paths:
       - out
 
-test:
-  stage: test
-  script:
-    - cat out/index.html
